@@ -1,4 +1,7 @@
-## CME
+# Detailed Description of Every Field
+
+
+## CME (coronal mass ejection)
 
 | Field                   | Meaning                                                                                                                                                                                                                                                                                                                                 |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -53,7 +56,7 @@
 | **`cmeIDs`**                                         | List of CME IDs linked to this model run. Here: the same as the top-level `activityID`.                                                                                           |
 
 
-## GST
+## GST (geomagnetic storms)
 | Field                   | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`gstID`**             | Unique identifier for the geomagnetic storm event. Format: `YYYY-MM-DDTHH:MM:SS-GST-###`. <br>Here: `"2025-08-09T15:00:00-GST-001"` means this was the first recorded GST starting at 15:00 UTC on Aug 9, 2025.                                                                                                                                                                                                                                                                                                                   |
@@ -66,7 +69,7 @@
 | **`sentNotifications`** | Space weather alerts/notifications sent out about this storm. Each includes: <br>• **`messageID`** — Unique identifier of the alert (`20250809-AL-005`, `20250809-AL-006`). <br>• **`messageIssueTime`** — When the alert was issued. <br>• **`messageURL`** — Link to the actual alert text/details in DONKI.                                                                                                                                                                                                                  |
 
 
-## FLR
+## FLR (solar flares)
 | Field                   | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`flrID`**             | Unique identifier for the solar flare event. Format: `YYYY-MM-DDTHH:MM:SS-FLR-###`. <br>Here: `"2025-08-10T02:46:00-FLR-001"` → first recorded flare starting at 02:46 UTC on Aug 10, 2025.                                                                                                                                                                                                                                                                               |
@@ -87,7 +90,7 @@
 
 
 
-## IPS
+## IPS (interplanetary shocks)
 | Field                | Meaning                                                                                                                                                                    |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`catalog`**        | Source catalog for the event. `"M2M_CATALOG"` is an internal NASA DONKI catalog designation.                                                                               |
@@ -99,7 +102,7 @@
 | **`link`**           | URL to DONKI’s public record of this IPS event.                                                                                                                            |
 
 
-## HSS
+## HSS (high speed streams)
 | Field                   | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`hssID`**             | Unique identifier for the High-Speed Stream event. Format: `YYYY-MM-DDTHH:MM:SS-HSS-###`. <br>Here: `"2016-01-11T12:00:00-HSS-001"` → the first HSS detected on **2016-01-11 at 12:00 UTC**.                                                                                                                                                                                                                                                                        |
@@ -110,3 +113,4 @@
 | **`link`**              | Direct URL to DONKI’s record page for this HSS event. Researchers can find plots, additional context, and linked analyses there.                                                                                                                                                                                                                                                                                                                                    |
 | **`linkedEvents`**      | Other solar/space weather events associated with this HSS (e.g., CMEs, IPS, GST). <br>`null` here means no specific linked events were recorded.                                                                                                                                                                                                                                                                                                                    |
 | **`sentNotifications`** | Alerts or warnings issued to forecasters/operators about this HSS. <br>`null` here means none were sent.                                                                                                                                                                                                                                                                                                                                                            |
+
