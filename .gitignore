@@ -1,2 +1,17 @@
 \spacenv
+.env
+# txt
 somestuff.txt
+
+# ipynb
+api-test.ipynb
+table_info.ipynb
+
+#py
+new.py
+
+# json
+cme.json
+
+#md
+info.md
