@@ -1,0 +1,6 @@
+{
+    "project_dir" : ".",
+    "json_data_dir" : "data/raw/json_data",
+    "processed_data_dir" : "data/processed",
+    "notebooks_dir" : "notebooks"
+}

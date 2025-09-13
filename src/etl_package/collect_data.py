@@ -33,26 +33,29 @@ def get_dates()->tuple:
 def collect_donki_data(type):
     start, end = get_dates()
     url = get_donki_url(start=start, end=end, type=type)
-    data = get_donki_json(type, url)
-    return data
+    json_data = get_donki_json(type, url)
+    with open(file=f"{type.lower()}.json", mode="w") as file:
+        file.write(str(json_data))
+    return json_data
 
 # -----------------------------------------------------------------------------------
 
 def parse_cme_data(data)->object:
     df = pd.json_normalize(data)
-    df['cmeAnalyses'] = df['cmeAnalyses'].apply(lambda x: x[0] if x != None else None)
+    df['cmeAnalyses'] = df['cmeAnalyses'].apply(lambda x: x[0] if x != [] else None)
 
     df_cme = df[['activityID', 'cmeAnalyses']].copy() # to avoid pandas warning- working on subsets better to explixly use copy
     df_cme = pd.json_normalize(df_cme.to_dict(orient='records')) # normalize expects json input so we convert back to dict
-    df_cme = df_cme.rename(columns=lambda x: x.replace('cmeAnalyses.', ''))
+    df_cme = df_cme.rename(columns=lambda x: x.replace('cmeAnalyses.', '')) # to avoid long names of columns- cmeAnalyses already has unique fields
 
-    df_enlil = df_enlil[['activityID', 'enlilList']].copy() 
+    df_enlil = df_cme[['activityID', 'enlilList']].copy()
+    df_enlil = df_enlil.dropna() # some float (nan) values need to be eliminated to run apply next
     df_enlil['enlilList'] = df_enlil['enlilList'].apply(lambda x: x[0] if x != [] else None)
     df_enlil = pd.json_normalize(df_enlil.to_dict(orient='records'))
     df_enlil = df_enlil.rename(columns=lambda x: x.replace('enlilList.', 'enlil.'))
 
-    df = df.merge(df_cme, on='activityID', how='inner')
-    df = df.merge(df_enlil, on='activityID', how='inner')
+    df = pd.merge(df, df_cme, on='activityID', how='inner')
+    df = pd.merge(df, df_enlil, on='activityID', how='inner')
     return df
 
 def parse_gst_data(data)->object:
@@ -73,32 +76,15 @@ def parse_hss_data(data):
     return df
 
 # TRANSFORM
-def get_dataframe(type, data): # transforms json output
+def get_dataframe(type, data)->object: # transforms json output
     if type == 'CME':
-        parse_cme_data(data)
+        return parse_cme_data(data)
     elif type == 'GST':
-        parse_gst_data(data)
+        return parse_gst_data(data)
     elif type == 'FLR':
-        parse_flr_data(data)
+        return parse_flr_data(data)
     elif type == 'IPS':
-        parse_ips_data(data)
+        return parse_ips_data(data)
     else:
-        parse_hss_data(data)
+        return parse_hss_data(data)
 
-
-def parse_gst_data(data):
-    ...
-# def parse_flr_data(data):
-#     ...
-# def parse_ips_data(data):
-#     ...
-# def parse_hss_data(data):
-#     ...
-
-def main():
-    start = "2025-08-01"
-    end = date.today
-    url = get_donki_url(start=start, end=end, type='GST')
-    collect_donki_data(url)
-
-main()

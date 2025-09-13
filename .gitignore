@@ -1,5 +1,10 @@
 \spacenv
 .env
+
+
+#data
+data/raw/json_data/*.json
+
 # txt
 somestuff.txt
 
@@ -9,9 +14,6 @@ table_info.ipynb
 
 #py
 new.py
-
-# json
-cme.json
 
 #md
 info.md
