@@ -1,19 +1,19 @@
-\spacenv
+# environments and build files
+spacenv/
+__pycache__/
+*.pyc
 .env
 
+# data files
+data/
 
-#data
-data/raw/json_data/*.json
+# local files in src
+src/space_weather.egg-info/
+src/get_parquet.py
+src/new.py
 
-# txt
+# local files in root
+info.md
 somestuff.txt
 
-# ipynb
-api-test.ipynb
-table_info.ipynb
 
-#py
-new.py
-
-#md
-info.md

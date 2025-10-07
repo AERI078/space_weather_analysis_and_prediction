@@ -1,6 +1,6 @@
 import pyarrow as pa
 import pyarrow.parquet as pq
-from etl_package import collect_data
+from space_weather_package import collect_data
 
 gst_json = collect_data.collect_donki_data('GST')
 gst_df = collect_data.get_dataframe('GST', gst_json)

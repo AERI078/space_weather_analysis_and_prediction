@@ -17,12 +17,22 @@ def get_donki_url(start, end, type)->str:
     url = f"https://api.nasa.gov/DONKI/{type}?startDate={start}&endDate={end}&api_key={donki_key}"
     return url
 
-def get_donki_json(type, url)->list: # returns json output 
-    response = requests.get(url)
-    response.raise_for_status()
-
-    data = response.json()
-    return data
+def get_donki_json(type, url)->list: 
+    '''returns json output of url given'''
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        raise Exception(f"HTTP Error occurred: {e}")
+    except requests.exceptions.ConnectionError as e:
+        raise Exception(f"Connection Error occurred: {e}")
+    except requests.exceptions.Timeout as e:
+        raise Exception(f"Timeout Error occurred: {e}")
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"An unexpected Request error occurred: {e}")
+    else:
+        data = response.json()
+        return data
 
 def get_dates()->tuple:
     start = "2015-01-01"
